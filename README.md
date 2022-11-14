@@ -56,16 +56,4 @@ it is easier to add this line in the `package.json` file.
 
 This repo can work with any EVM compatible blockchain. To connect to a blockchain you need an `RPC_URL`.
 
-For developement purpouses we'll use a local enviroment as `ganache-cli`. You can install it with
-
-```
-yarn add ganache-cli
-```
-
-and quickly start a node with
-
-```
-yarn ganache-cli
-```
-
-you'll be able to observe that the server will be on `http://127.0.0.1:8584`, this will be out RPC_URL.
+For developement purpouses we'll use a local enviroment as `ganache`.
