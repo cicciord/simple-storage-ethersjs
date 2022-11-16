@@ -2,6 +2,17 @@
 
 Learning exercise project to deploy and interact with a smartcontract using `ethers.js`.
 
+-   [Simple Storage Solidity](#simple-storage-solidity)
+-   [Smartcontract](#smartcontract)
+-   [Requirements](#requirements)
+-   [Compiling](#compiling)
+-   [Blockchain](#blockchain)
+-   [Deploy (and interact)](#deploy-and-interact)
+-   [Security improvement](#security-improvement)
+    -   [Set enviromental variables at execution time](#set-enviromental-variables-at-execution-time)
+    -   [Encrypt the key](#encrypt-the-key)
+-   [Typescript](#typescript)
+
 # Smartcontract
 
 The smartcontract that is used is a simple implementation of a contract where you can change the value of a number saved on the blockchain. You can also save the number associated to a person.
@@ -10,17 +21,17 @@ The smartcontract that is used is a simple implementation of a contract where yo
 
 To use the following repository you need to have installed this packages:
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-  - You'll know you did it right if you can run `git --version` and you see a response like `git version x.x.x`
-- [Nodejs](https://nodejs.org/en/)
-  - You'll know you've installed nodejs right if you can run:
-    - `node --version` and get an ouput like: `vx.x.x`
-- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) instead of `npm`
-  - You'll know you've installed yarn right if you can run:
-    - `yarn --version` and get an output like: `x.x.x`
-    - You might need to install it with npm
-- [ganache](https://trufflesuite.com/ganache/)
-  - You can alternatively use [ganache-cli](https://www.npmjs.com/package/ganache-cli) or [hardhat](https://hardhat.org/)
+-   [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+    -   You'll know you did it right if you can run `git --version` and you see a response like `git version x.x.x`
+-   [Nodejs](https://nodejs.org/en/)
+    -   You'll know you've installed nodejs right if you can run:
+        -   `node --version` and get an ouput like: `vx.x.x`
+-   [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) instead of `npm`
+    -   You'll know you've installed yarn right if you can run:
+        -   `yarn --version` and get an output like: `x.x.x`
+        -   You might need to install it with npm
+-   [ganache](https://trufflesuite.com/ganache/)
+    -   You can alternatively use [ganache-cli](https://www.npmjs.com/package/ganache-cli) or [hardhat](https://hardhat.org/)
 
 # Compiling
 
@@ -44,7 +55,7 @@ yarn solcjs --bin --abi --include-path node_modules/ --base-path <base-path> -o 
 
 it is easier to add this line in the `package.json` file.
 
-```
+```json
 {
     "scripts": {
         "compile": "<compile-command>"
@@ -88,16 +99,16 @@ If you don't wont to insert your enviromental variables every time but you still
 
 The steps to follow are:
 
-- Insert the `PRIVATE_KEY` and a `PASSWORD` in `.env` or at execution time
-- Run the `encrypt script`
+-   Insert the `PRIVATE_KEY` and a `PASSWORD` in `.env` or at execution time
+-   Run the `encrypt script`
 
 ```
 node encryptKey.js
 ```
 
-- The output will be saved in `.encryptedKey.json`
-- Delete PRIVATE_KEY and PASSWORD from `.env`
-- Now you can run the deploy script as this
+-   The output will be saved in `.encryptedKey.json`
+-   Delete PRIVATE_KEY and PASSWORD from `.env`
+-   Now you can run the deploy script as this
 
 ```
 PASSWORD=<your password> node deploy-encrypted.js
@@ -110,3 +121,13 @@ history -c
 ```
 
 to delete the terminal history so it is not possible to find out what the password used is.
+
+# Typescript
+
+There is a typescript compatible version of the code on the **typescript** branch
+
+It works exatly the same, you should execute commands replacing `node` with `ts-node`
+
+```
+ts-node <file name>
+```

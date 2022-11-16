@@ -1,8 +1,8 @@
-const ethers = require("ethers");
-require("dotenv").config();
-const fs = require("fs");
+import { ethers } from "ethers";
+import "dotenv/config";
+import * as fs from "fs-extra";
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const PRIVATE_KEY = process.env.PRIVATE_KEY!;
 const RPC_URL = process.env.RPC_URL;
 
 async function main() {
@@ -23,7 +23,7 @@ async function main() {
         nonce: nonce,
         gasPrice: gasPrice,
         gasLimit: 1000000,
-        to: null,
+        // to: null,
         value: 0,
         data: binaryHex,
         chainId: chainId,

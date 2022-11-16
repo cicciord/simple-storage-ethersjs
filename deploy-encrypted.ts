@@ -1,13 +1,17 @@
-const ethers = require("ethers");
-require("dotenv").config();
-const fs = require("fs");
+import { ethers } from "ethers";
+import "dotenv/config";
+import * as fs from "fs-extra";
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const PASSWORD = process.env.PASSWORD!;
 const RPC_URL = process.env.RPC_URL;
 
 async function main() {
     const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
-    const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+
+    // create a wallet object from json file
+    const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf-8");
+    let wallet = ethers.Wallet.fromEncryptedJsonSync(encryptedJson, PASSWORD);
+    wallet = await wallet.connect(provider);
 
     const abi = fs.readFileSync(
         "./SimpleStorage_sol_SimpleStorage.abi",
@@ -25,7 +29,7 @@ async function main() {
 
     const contract = await contractFactory.deploy(); // deploy function accept an overrides object to set gasPrice, gasLimit, etc...
 
-    console.log(`Contract deployed at ${contract.address}`);
+    console.log("Contract deployed!");
 
     const transactionReceipt = await contract.deployTransaction.wait(1);
 

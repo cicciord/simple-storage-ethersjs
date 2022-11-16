@@ -1,9 +1,9 @@
-const ethers = require("ethers");
-const fs = require("fs");
-require("dotenv").config();
+import { ethers } from "ethers";
+import "dotenv/config";
+import * as fs from "fs-extra";
 
-PRIVATE_KEY = process.env.PRIVATE_KEY;
-PASSWORD = process.env.PASSWORD;
+const PRIVATE_KEY = process.env.PRIVATE_KEY!;
+const PASSWORD = process.env.PASSWORD!;
 
 async function main() {
     const wallet = new ethers.Wallet(PRIVATE_KEY);
