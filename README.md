@@ -1,6 +1,6 @@
 # Simple Storage Solidity
 
-Learning exercive project to interact with a smartcontract with `ethers.js`.
+Learning exercise project to deploy and interact with a smartcontract using `ethers.js`.
 
 # Smartcontract
 
