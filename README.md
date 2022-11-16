@@ -57,3 +57,56 @@ it is easier to add this line in the `package.json` file.
 This repo can work with any EVM compatible blockchain. To connect to a blockchain you need an `RPC_URL`.
 
 For developement purpouses we'll use a local enviroment as `ganache`.
+
+# Deploy (and interact)
+
+To deploy the contract is enough to run the command
+
+```
+node deploy.js
+```
+
+Make sure to have set the `RPC_URL` and the `PRIVATE_KEY` in the `.env` file.
+
+**IMPORTANT** -> remember never to push the `.env` file to github or never make it public. Add a `.gitignore` file!
+
+# Security improvement
+
+If you are worried you might leak in some way your `.env`
+
+## Set enviromental variables at execution time
+
+you can run the script as this without the need of any file
+
+```
+RPC_URL=<rpc url> PRIVATE_KEY=<private key> node deploy.js
+```
+
+## Encrypt the key
+
+If you don't wont to insert your enviromental variables every time but you still don't want to show the private key to everyone who has access to your project the solution would be to **encrypt the key**.
+
+The steps to follow are:
+
+- Insert the `PRIVATE_KEY` and a `PASSWORD` in `.env` or at execution time
+- Run the `encrypt script`
+
+```
+node encryptKey.js
+```
+
+- The output will be saved in `.encryptedKey.json`
+- Delete PRIVATE_KEY and PASSWORD from `.env`
+- Now you can run the deploy script as this
+
+```
+PASSWORD=<your password> node deploy-encrypted.js
+```
+
+after the execution is suggest to run
+
+```
+history -c
+```
+
+to delete the terminal history so it is not possible to find out what the password used is.
