@@ -15,6 +15,7 @@ async function main() {
     "utf-8"
   );
 
+  // deploying the contract
   const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
 
   console.log("Deploying contract...");
@@ -25,7 +26,22 @@ async function main() {
 
   const transactionReceipt = await contract.deployTransaction.wait(1);
 
-  console.log(transactionReceipt);
+  // interacting with the contract
+
+  // get initial value for the stored number
+  // this is a view function, thus it does not alter the state of the blockchain and it does not cost any gas
+  const initialFavouriteNumber = (await contract.retrieve()).toString();
+  console.log(`Current favourite number: ${initialFavouriteNumber}`);
+
+  // change stored number
+  // this time we change the blockchain state, then we'll use gas
+  console.log("Setting new favourite number...");
+  const changeNumberTxResponse = await contract.store("23"); // use string format when passing int (for small numbers would work even passing int)
+  const changeNumberTxReceipt = await changeNumberTxResponse.wait(1);
+  console.log("Favourite number set!");
+
+  const updatedNumber = await contract.retrieve();
+  console.log(`The new favourite number is: ${updatedNumber}`);
 }
 
 main()
