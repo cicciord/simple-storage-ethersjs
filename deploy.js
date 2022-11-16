@@ -25,7 +25,7 @@ async function main() {
 
     const contract = await contractFactory.deploy(); // deploy function accept an overrides object to set gasPrice, gasLimit, etc...
 
-    console.log("Contract deployed!");
+    console.log(`Contract deployed at ${contract.address}`);
 
     const transactionReceipt = await contract.deployTransaction.wait(1);
 
